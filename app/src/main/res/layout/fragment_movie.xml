@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragments.MovieFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/txt_coming_soon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Coming Soon"
+                android:textColor="@color/colorFont"
+                android:textSize="@dimen/h3"
+                android:layout_margin="@dimen/small_dimen"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"/>
+            <TextView
+                android:id="@+id/txt_view_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="View all"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginEnd="@dimen/small_dimen"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"/>
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_coming_soon"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+            app:layout_constraintBottom_toTopOf="@+id/txt_popular"
+            tools:listitem="@layout/card_movie_item"/>
+
+        <TextView
+            android:id="@+id/txt_popular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Popular Movie"
+            android:textColor="@color/colorFont"
+            android:textSize="@dimen/h3"
+            android:layout_margin="@dimen/small_dimen"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rv_coming_soon"/>
+        <TextView
+            android:id="@+id/txt_view_all_popular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View all"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center_vertical"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginEnd="@dimen/small_dimen"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rv_coming_soon"
+            app:layout_constraintBottom_toTopOf="@id/rv_popular"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_popular"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:paddingBottom="?android:attr/actionBarSize"
+            app:layout_constraintTop_toBottomOf="@id/txt_popular"
+            tools:listitem="@layout/list_movie_item"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
