@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.asrul.myapplication.Adapters.ListMovieAdapter;
 import com.asrul.myapplication.Data.DataMovie;
@@ -30,7 +31,6 @@ public class FavoriteFragment extends Fragment {
     public FavoriteFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,5 +52,12 @@ public class FavoriteFragment extends Fragment {
         rvFavorite.setLayoutManager(new LinearLayoutManager(getContext()));
         ListMovieAdapter listMovieAdapter = new ListMovieAdapter(list);
         rvFavorite.setAdapter(listMovieAdapter);
+
+        listMovieAdapter.setOnItemClickCallback(new ListMovieAdapter.OnItemClickCallback() {
+            @Override
+            public void onItemClicked(Movie movie) {
+                Toast.makeText(getContext(), "Kamu memilih " + movie.getTitle(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

@@ -19,6 +19,11 @@ import java.util.ArrayList;
 public class GridMovieAdapter extends RecyclerView.Adapter<GridMovieAdapter.GridViewHolder> {
 
     private ArrayList<Movie> movieList;
+    private OnItemClickCallback onItemClickCallback;
+
+    public void setOnItemClickCallback(OnItemClickCallback onItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback;
+    }
 
     public GridMovieAdapter(ArrayList<Movie> list) {
         this.movieList = list;
@@ -32,7 +37,7 @@ public class GridMovieAdapter extends RecyclerView.Adapter<GridMovieAdapter.Grid
     }
 
     @Override
-    public void onBindViewHolder(@NonNull GridViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final GridViewHolder holder, int position) {
         Movie movie = movieList.get(position);
         Glide.with(holder.itemView.getContext())
                 .load(movie.getPoster())
@@ -40,6 +45,13 @@ public class GridMovieAdapter extends RecyclerView.Adapter<GridMovieAdapter.Grid
         holder.txtTitle.setText(movie.getTitle());
         holder.txtDirector.setText(movie.getDirector());
         holder.txtReleaseDate.setText(movie.getRelease_date());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClickCallback.onItemClicked(movieList.get(holder.getAdapterPosition()));
+            }
+        });
     }
 
     @Override
@@ -51,12 +63,16 @@ public class GridMovieAdapter extends RecyclerView.Adapter<GridMovieAdapter.Grid
         ImageView imgPoster;
         TextView txtTitle, txtDirector, txtReleaseDate;
 
-        public GridViewHolder(@NonNull View itemView) {
+        private GridViewHolder(@NonNull View itemView) {
             super(itemView);
             txtTitle = itemView.findViewById(R.id.txt_title);
             txtDirector = itemView.findViewById(R.id.txt_name);
             txtReleaseDate = itemView.findViewById(R.id.txt_date);
             imgPoster = itemView.findViewById(R.id.img_poster);
         }
+    }
+
+    public interface OnItemClickCallback {
+        void onItemClicked(Movie movie);
     }
 }

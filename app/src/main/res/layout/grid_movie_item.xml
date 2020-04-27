@@ -12,14 +12,16 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@color/colorAccent"/>
+        tools:src="@color/colorAccent"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:layout_width="55dp"
         android:layout_height="55dp"
-        android:text="8.0"
+        android:text="@string/score"
         android:textSize="24sp"
         android:fontFamily="@font/poppins_bold"
+        android:textColor="#FFC700"
         android:padding="@dimen/small_dimen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -30,7 +32,8 @@
         android:src="@drawable/ic_favorite_border_black_24dp"
         android:padding="@dimen/small_dimen"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/img_poster"/>
+        app:layout_constraintBottom_toBottomOf="@id/img_poster"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:layout_width="match_parent"
@@ -58,7 +61,7 @@
         android:id="@+id/txt_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Boong Joon-ho"
+        android:text="@string/director_name"
         android:fontFamily="@font/poppins_bold"
         app:layout_constraintStart_toEndOf="@id/txt_director"
         app:layout_constraintTop_toBottomOf="@id/txt_title"/>
@@ -77,7 +80,7 @@
         android:id="@+id/txt_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="March 22, 2019"
+        android:text="@string/date"
         android:fontFamily="@font/poppins_bold"
         app:layout_constraintStart_toEndOf="@id/txt_release_date"
         app:layout_constraintTop_toBottomOf="@id/txt_director"/>

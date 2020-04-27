@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.asrul.myapplication.Adapters.GridMovieAdapter;
 import com.asrul.myapplication.Data.DataMovie;
@@ -31,5 +32,12 @@ public class MoreMovieActivity extends AppCompatActivity {
         rvMore.setLayoutManager(new GridLayoutManager(getApplicationContext() ,2));
         GridMovieAdapter gridMovieAdapter = new GridMovieAdapter(list);
         rvMore.setAdapter(gridMovieAdapter);
+
+        gridMovieAdapter.setOnItemClickCallback(new GridMovieAdapter.OnItemClickCallback() {
+            @Override
+            public void onItemClicked(Movie movie) {
+                Toast.makeText(getApplicationContext(), "Kamu memilih " + movie.getTitle(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

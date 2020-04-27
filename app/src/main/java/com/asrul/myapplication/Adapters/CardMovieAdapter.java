@@ -5,8 +5,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.asrul.myapplication.Data.Movie;
@@ -31,12 +33,18 @@ public class CardMovieAdapter extends RecyclerView.Adapter<CardMovieAdapter.Card
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CardMovieAdapter.CardViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final CardMovieAdapter.CardViewHolder holder, int position) {
         Movie movie = movieList.get(position);
         Glide.with(holder.itemView.getContext())
                 .load(movieList.get(position).getPoster())
                 .into(holder.imgPoster);
         holder.txtTitle.setText(movie.getTitle());
+        holder.cvMovie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(holder.itemView.getContext(), "Kamu memilih "+ movieList.get(holder.getAdapterPosition()).getTitle(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -47,10 +55,12 @@ public class CardMovieAdapter extends RecyclerView.Adapter<CardMovieAdapter.Card
     public class CardViewHolder extends RecyclerView.ViewHolder {
         TextView txtTitle;
         ImageView imgPoster;
-        public CardViewHolder(@NonNull View itemView) {
+        CardView cvMovie;
+        private CardViewHolder(@NonNull View itemView) {
             super(itemView);
             txtTitle = itemView.findViewById(R.id.txt_title);
             imgPoster = itemView.findViewById(R.id.img_poster);
+            cvMovie = itemView.findViewById(R.id.cv_movie);
         }
     }
 }

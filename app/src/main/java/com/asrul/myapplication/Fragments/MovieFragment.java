@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.asrul.myapplication.Adapters.CardMovieAdapter;
 import com.asrul.myapplication.Adapters.ListMovieAdapter;
@@ -30,7 +31,6 @@ public class MovieFragment extends Fragment {
 
     private RecyclerView recyclerView, rvComingSoon;
     private ArrayList<Movie> list = new ArrayList<>();
-    private TextView txtMore, txtPopularMore;
 
     public MovieFragment() {
         // Required empty public constructor
@@ -47,6 +47,8 @@ public class MovieFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        TextView txtMore, txtPopularMore;
 
         txtMore = view.findViewById(R.id.txt_view_all);
         txtMore.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +79,13 @@ public class MovieFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         ListMovieAdapter listMovieAdapter = new ListMovieAdapter(list);
         recyclerView.setAdapter(listMovieAdapter);
+
+        listMovieAdapter.setOnItemClickCallback(new ListMovieAdapter.OnItemClickCallback() {
+            @Override
+            public void onItemClicked(Movie movie) {
+                Toast.makeText(getContext(), "Kamu memilih " + movie.getTitle(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void showMovieCard() {

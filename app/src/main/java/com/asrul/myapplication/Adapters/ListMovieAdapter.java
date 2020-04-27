@@ -18,6 +18,11 @@ import java.util.ArrayList;
 public class ListMovieAdapter extends RecyclerView.Adapter<ListMovieAdapter.ListViewHolder> {
 
     private ArrayList<Movie> movieList;
+    private OnItemClickCallback onItemClickCallback;
+
+    public void setOnItemClickCallback(OnItemClickCallback onItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback;
+    }
 
     public ListMovieAdapter(ArrayList<Movie> list) {
         this.movieList = list;
@@ -31,7 +36,7 @@ public class ListMovieAdapter extends RecyclerView.Adapter<ListMovieAdapter.List
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ListMovieAdapter.ListViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ListMovieAdapter.ListViewHolder holder, int position) {
         Movie movie = movieList.get(position);
         Glide.with(holder.itemView.getContext())
                 .load(movie.getPoster())
@@ -39,6 +44,13 @@ public class ListMovieAdapter extends RecyclerView.Adapter<ListMovieAdapter.List
         holder.txtTitle.setText(movie.getTitle());
         holder.txtName.setText(movie.getDirector());
         holder.txtDate.setText(movie.getRelease_date());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClickCallback.onItemClicked(movieList.get(holder.getAdapterPosition()));
+            }
+        });
     }
 
     @Override
@@ -49,12 +61,16 @@ public class ListMovieAdapter extends RecyclerView.Adapter<ListMovieAdapter.List
     public class ListViewHolder extends RecyclerView.ViewHolder {
         TextView txtTitle, txtName, txtDate;
         ImageView imgPoster;
-        public ListViewHolder(@NonNull View itemView) {
+        private ListViewHolder(@NonNull View itemView) {
             super(itemView);
             txtTitle = itemView.findViewById(R.id.txt_title);
             txtName = itemView.findViewById(R.id.txt_name);
             txtDate = itemView.findViewById(R.id.txt_date);
             imgPoster = itemView.findViewById(R.id.img_poster);
         }
+    }
+
+    public interface OnItemClickCallback {
+        void onItemClicked(Movie movie);
     }
 }

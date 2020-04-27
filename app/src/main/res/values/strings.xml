@@ -3,4 +3,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title">Parasite</string>
+    <string name="date">March 22, 2019</string>
+    <string name="director_name">Bong Joon-ho</string>
+    <string name="score">8.0</string>
 </resources>
